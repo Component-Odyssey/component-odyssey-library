@@ -1,4 +1,4 @@
-# Componny Odyssey Starter
+# Writing an Advanced Web Component
 
 The companion repo to the corresponding [Component Odyssey](https://component-odyssey.com) lesson.
 
