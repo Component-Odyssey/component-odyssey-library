@@ -6,6 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Component Odyssey</title>
   <link rel="stylesheet" href="./style.css" />
+  <style>
+    body {
+      margin: 100px;
+    }
+  </style>
 </head>
 
 <body>
@@ -20,6 +25,14 @@
 
       :host([disabled]) {
         opacity: 0.5;
+      }
+
+      :host([checked]) button {
+        background-color: #cc0088;
+        background-image: url("https://component-odyssey.s3.amazonaws.com/tick.svg");
+        background-repeat: no-repeat;
+        background-position: center;
+        border-color: transparent;
       }
 
       button {
@@ -69,6 +82,27 @@
         this.shadowRoot.append(clonedNode)
       }
 
+      connectedCallback() {
+        const button = this.shadowRoot.querySelector('button');
+        button.addEventListener('click', this.#onClick)
+      }
+
+      disconnectedCallback() {
+        const button = this.shadowRoot.querySelector('button');
+        button.removeEventListener('click', this.#onClick)
+
+      }
+
+      #onClick = () => {
+        const isChecked = this.hasAttribute('checked')
+
+        if (isChecked) {
+          this.removeAttribute('checked')
+        } else {
+          this.setAttribute('checked', '')
+        }
+      }
+
       get disabled() {
         return this.hasAttribute('disabled')
       }
@@ -78,6 +112,18 @@
           this.setAttribute('disabled', '')
         } else {
           this.removeAttribute('disabled')
+        }
+      }
+
+      get checked() {
+        return this.hasAttribute('checked')
+      }
+
+      set checked(val) {
+        if (val) {
+          this.setAttribute('checked', '')
+        } else {
+          this.removeAttribute('checked')
         }
       }
 
