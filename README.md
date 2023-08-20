@@ -6,7 +6,7 @@ The companion repo to the corresponding [Component Odyssey](https://component-od
 
 Clone this repo using:
 
-`git clone git@github.com:Component-Odyssey/....git`
+`git clone git@github.com:Component-Odyssey/writing-an-advanced-web-component.git`
 
 Open the folder in VSCode
 
