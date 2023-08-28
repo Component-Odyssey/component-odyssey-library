@@ -21,7 +21,7 @@ This folder contains the finished code for each lesson. You can take a look in t
 
 To get started, clone this repo using:
 
-`git clone git@github.com:Component-Odyssey/writing-an-advanced-web-component.git`
+`git clone git@github.com:Component-Odyssey/component-odyssey-library.git`
 
 Always check that you have the latest code by running `git pull` before you start working on a lesson:
 
