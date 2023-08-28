@@ -5,7 +5,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Component Odyssey</title>
-  <link rel="stylesheet" href="./style.css" />
   <style>
     body {
       margin: 100px;
@@ -14,7 +13,7 @@
 </head>
 
 <body>
-  <template id="custom-checkbox-template">
+  <template id="odyssey-checkbox-template">
     <style>
       #checkbox-wrapper {
         display: flex;
@@ -63,20 +62,24 @@
     <div id="checkbox-wrapper">
       <button id="indicator"></button>
       <label>
-        <p id="label">placeholder</p>
+        <p id="label">
+          <slot />
+        </p>
       </label>
     </div>
   </template>
 
-  <custom-checkbox></custom-checkbox>
+  <odyssey-checkbox>
+    check me
+  </odyssey-checkbox>
 
   <script type="module">
-    class CustomCheckbox extends HTMLElement {
+    class OdysseyCheckbox extends HTMLElement {
       constructor() {
         super()
         this.attachShadow({ mode: 'open' })
 
-        const template = document.getElementById('custom-checkbox-template')
+        const template = document.getElementById('odyssey-checkbox-template')
         const templateContent = template.content
         const clonedNode = templateContent.cloneNode(true)
         this.shadowRoot.append(clonedNode)
@@ -144,6 +147,8 @@
       }
     }
 
-    customElements.define('custom-checkbox', CustomCheckbox)
+    customElements.define('odyssey-checkbox', OdysseyCheckbox)
   </script>
 </body>
+
+</html>
