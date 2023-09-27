@@ -1,72 +1,89 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Component Odyssey</title>
+  <title>Component Odyssey Library</title>
+  <meta charset="UTF-8" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Work+Sans:wght@400;700&display=swap"
+    rel="stylesheet" />
   <style>
     /* Global Styles */
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      margin: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 300px;
     }
   </style>
 
+</head>
+
+<body>
   <style>
-    #checkbox-wrapper {
+    /* Component Styles */
+    :root {
+      font-size: 18px;
+      font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Helvetica, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .visually-hidden {
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+      height: 1px;
+      overflow: hidden;
+      position: absolute;
+      white-space: nowrap;
+      width: 1px;
+    }
+
+    label[for="checkbox"] {
+      cursor: pointer;
       display: flex;
       flex-direction: row;
       align-items: center;
       gap: 8px;
+      width: fit-content;
+      user-select: none;
     }
 
-    :host([disabled]) {
-      opacity: 0.5;
+    input:focus-visible+label[for="checkbox"] {
+      outline: 2px solid #1b00e5;
+      outline-offset: 4px;
     }
 
-
-    :host([checked]) button {
-      background-color: #cc0088;
-      background-image: url("https://component-odyssey.s3.amazonaws.com/tick.svg");
-      background-repeat: no-repeat;
+    input:checked+label[for="checkbox"] .visual-checkbox {
+      background: #cc0088;
+      background-image: url(https://component-odyssey.s3.amazonaws.com/tick.svg);
       background-position: center;
-      border-color: transparent;
+      background-repeat: no-repeat;
+      border: none;
     }
 
-    button {
-      cursor: pointer;
-      height: 24px;
-      width: 24px;
-      padding: 0;
-      margin: 0;
-      border: 2px solid #1e1e1e;
-      background: white;
+    .visual-checkbox {
+      display: inline-block;
+      height: 32px;
+      width: 32px;
       border-radius: 50%;
-    }
-
-    button:not([disabled]):active {
-      background: black;
-    }
-
-    button[disabled] {
-      cursor: default;
-    }
-
-    p {
-      font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
-        Roboto, Helvetica, sans-serif;
-      color: #1e1e1e;
+      border: 2px solid black;
     }
   </style>
-</head>
+  <input id="checkbox" class="visually-hidden" type="checkbox" />
+  <label for="checkbox">
+    <span class="visual-checkbox"></span>
+    Is Checked
+  </label>
 
-<body>
-  <div id="checkbox-wrapper">
-    <button id="indicator"></button>
-    <label>
-      <p id="label">placeholder</p>
-    </label>
-  </div>
+  <!-- Render your component here -->
 
 
   <script type="module">
