@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Work+Sans:wght@400;700&display=swap"
-  rel="stylesheet" />
+<html>
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Component Odyssey</title>
+  <meta charset="UTF-8" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Work+Sans:wght@400;700&display=swap"
+    rel="stylesheet" />
 
+  <title>Component Odyssey</title>
   <style>
     /* Global Styles */
     * {
@@ -27,16 +25,13 @@
 
 <body>
   <template id="odyssey-checkbox-template">
+
     <style>
       /* Component Styles */
       :host {
         font-size: 18px;
         font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
           Roboto, Helvetica, sans-serif;
-      }
-
-      :host([disabled]) {
-        opacity: 0.5;
       }
 
       * {
@@ -63,10 +58,6 @@
         user-select: none;
       }
 
-      input[disabled]+label[for="checkbox"] {
-        cursor: default;
-      }
-
       input:focus-visible+label[for="checkbox"] {
         outline: 2px solid #1b00e5;
         outline-offset: 4px;
@@ -80,10 +71,6 @@
         border: none;
       }
 
-      input:not([disabled]) + label[for="checkbox"]:active .visual-checkbox {
-        background: black;
-      }
-
       .visual-checkbox {
         display: inline-block;
         height: 32px;
@@ -93,9 +80,10 @@
       }
     </style>
     <input id="checkbox" class="visually-hidden" type="checkbox" />
+
     <label for="checkbox">
       <span class="visual-checkbox"></span>
-      Is Checked
+      <slot></slot>
     </label>
   </template>
 
@@ -113,66 +101,6 @@
 
         this.attachShadow({ mode: 'open' })
         this.shadowRoot.appendChild(templateContent.cloneNode(true))
-        this.input = this.shadowRoot.querySelector('input')
-      }
-
-      connectedCallback() {
-        const input = this.shadowRoot.querySelector('input');
-        input.addEventListener('change', this.#onChange)
-      }
-
-      disconnectedCallback() {
-        const input = this.shadowRoot.querySelector('input');
-        input.removeEventListener('change', this.#onChange)
-
-      }
-
-      #onChange = (e) => {
-        if (!this.input.checked) {
-          this.removeAttribute('checked')
-        } else {
-          this.setAttribute('checked', '')
-        }
-      }
-
-      get disabled() {
-        return this.hasAttribute('disabled')
-      }
-
-      set disabled(val) {
-        if (val) {
-          this.setAttribute('disabled', '')
-        } else {
-          this.removeAttribute('disabled')
-        }
-      }
-
-      get checked() {
-        return this.hasAttribute('checked')
-      }
-
-      set checked(val) {
-        if (val) {
-          this.setAttribute('checked', '')
-        } else {
-          this.removeAttribute('checked')
-        }
-      }
-
-      static get observedAttributes() {
-        return ['disabled']
-      }
-
-      attributeChangedCallback(name, oldVal, newVal) {
-        const input = this.shadowRoot.querySelector('input');
-
-        if (name === 'disabled') {
-          if (newVal !== null) {
-            input.setAttribute('disabled', '')
-          } else {
-            input.removeAttribute('disabled')
-          }
-        }
       }
     }
 

@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Work+Sans:wght@400;700&display=swap"
+  rel="stylesheet" />
 
 <head>
-  <meta charset="UTF-8" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Work+Sans:wght@400;700&display=swap"
-    rel="stylesheet" />
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Component Odyssey</title>
+
   <style>
     /* Global Styles */
     * {
@@ -25,7 +27,6 @@
 
 <body>
   <template id="odyssey-checkbox-template">
-
     <style>
       /* Component Styles */
       :host {
@@ -62,6 +63,10 @@
         user-select: none;
       }
 
+      input[disabled]+label[for="checkbox"] {
+        cursor: default;
+      }
+
       input:focus-visible+label[for="checkbox"] {
         outline: 2px solid #1b00e5;
         outline-offset: 4px;
@@ -75,11 +80,7 @@
         border: none;
       }
 
-      input[disabled]+label[for="checkbox"] {
-        cursor: default;
-      }
-
-      input:not([disabled])+label[for="checkbox"]:active .visual-checkbox {
+      input:not([disabled]) + label[for="checkbox"]:active .visual-checkbox {
         background: black;
       }
 
@@ -92,7 +93,6 @@
       }
     </style>
     <input id="checkbox" class="visually-hidden" type="checkbox" />
-
     <label for="checkbox">
       <span class="visual-checkbox"></span>
       <slot></slot>
@@ -105,8 +105,34 @@
 
   <script type="module">
     class OdysseyCheckbox extends HTMLElement {
-      static get observedAttributes() {
-        return ['disabled']
+      constructor() {
+        super()
+
+        const template = document.getElementById('odyssey-checkbox-template')
+        const templateContent = template.content;
+
+        this.attachShadow({ mode: 'open' })
+        this.shadowRoot.appendChild(templateContent.cloneNode(true))
+        this.input = this.shadowRoot.querySelector('input')
+      }
+
+      connectedCallback() {
+        const input = this.shadowRoot.querySelector('input');
+        input.addEventListener('change', this.#onChange)
+      }
+
+      disconnectedCallback() {
+        const input = this.shadowRoot.querySelector('input');
+        input.removeEventListener('change', this.#onChange)
+
+      }
+
+      #onChange = (e) => {
+        if (!this.input.checked) {
+          this.removeAttribute('checked')
+        } else {
+          this.setAttribute('checked', '')
+        }
       }
 
       get disabled() {
@@ -125,34 +151,20 @@
         return this.hasAttribute('checked')
       }
 
-      #handleChange() {
-        const isChecked = this.checkboxEl.checked;
-
-        if (isChecked) {
+      set checked(val) {
+        if (val) {
           this.setAttribute('checked', '')
         } else {
           this.removeAttribute('checked')
         }
       }
 
-      constructor() {
-        super()
-
-        const template = document.getElementById('odyssey-checkbox-template')
-        const templateContent = template.content;
-
-        this.attachShadow({ mode: 'open' })
-        this.shadowRoot.appendChild(templateContent.cloneNode(true))
-      }
-
-      connectedCallback() {
-        this.checkboxEl = this.shadowRoot.querySelector('input')
-
-        this.checkboxEl.addEventListener('change', this.#handleChange)
+      static get observedAttributes() {
+        return ['disabled']
       }
 
       attributeChangedCallback(name, oldVal, newVal) {
-        const input = this.shadowRoot.querySelector('input')
+        const input = this.shadowRoot.querySelector('input');
 
         if (name === 'disabled') {
           if (newVal !== null) {
