@@ -125,10 +125,9 @@
         return this.hasAttribute('checked')
       }
 
-      #handleChange() {
-        const isChecked = this.checkboxEl.checked;
-
-        if (isChecked) {
+      #handleChange = () => {
+        const input = this.shadowRoot.querySelector('input');
+        if (input.checked) {
           this.setAttribute('checked', '')
         } else {
           this.removeAttribute('checked')
@@ -146,9 +145,15 @@
       }
 
       connectedCallback() {
-        this.checkboxEl = this.shadowRoot.querySelector('input')
+        const input = this.shadowRoot.querySelector('input');
 
-        this.checkboxEl.addEventListener('change', this.#handleChange)
+        input.addEventListener('change', this.#handleChange)
+      }
+
+      disconnectedCallback() {
+        const input = this.shadowRoot.querySelector('input');
+
+        input.removeEventListener('change', this.#handleChange)
       }
 
       attributeChangedCallback(name, oldVal, newVal) {
