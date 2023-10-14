@@ -1,97 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Work+Sans:wght@400;700&display=swap"
+  rel="stylesheet" />
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Component Odyssey</title>
+
   <style>
+    /* Global Styles */
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      margin: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 300px;
     }
   </style>
 </head>
 
 <body>
   <odyssey-checkbox>
-    check me
+    Settings
   </odyssey-checkbox>
 
   <script type="module">
-    import { LitElement, html, css } from 'lit'
+    import { LitElement, css, html } from 'lit'
 
     class OdysseyCheckbox extends LitElement {
       static styles = css`
-        #checkbox-wrapper {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          gap: 8px;
-        }
+      :host {
+        font-size: 18px;
+        font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Helvetica, sans-serif;
+      }
 
-        :host([disabled]) {
-          opacity: 0.5;
-        }
+      :host([disabled]) {
+        opacity: 0.5;
+      }
 
-        :host([checked]) button {
-          background-color: #cc0088;
-          background-image: url("https://component-odyssey.s3.amazonaws.com/tick.svg");
-          background-repeat: no-repeat;
-          background-position: center;
-          border-color: transparent;
-        }
+      * {
+        box-sizing: border-box;
+      }
 
-        button {
-          cursor: pointer;
-          height: 24px;
-          width: 24px;
-          padding: 0;
-          margin: 0;
-          border: 2px solid #1e1e1e;
-          background: white;
-          border-radius: 50%;
-        }
+      .visually-hidden {
+        clip: rect(0 0 0 0);
+        clip-path: inset(50%);
+        height: 1px;
+        overflow: hidden;
+        position: absolute;
+        white-space: nowrap;
+        width: 1px;
+      }
 
-        button:not([disabled]):active {
-          background: black;
-        }
+      label[for="checkbox"] {
+        cursor: pointer;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 8px;
+        width: fit-content;
+        user-select: none;
+      }
 
-        button[disabled] {
-          cursor: default;
-        }
+      input[disabled]+label[for="checkbox"] {
+        cursor: default;
+      }
 
-        p {
-          font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
-            Roboto, Helvetica, sans-serif;
-          color: #1e1e1e;
-        }
+      input:focus-visible+label[for="checkbox"] {
+        outline: 2px solid #1b00e5;
+        outline-offset: 4px;
+      }
+
+      input:checked+label[for="checkbox"] .visual-checkbox {
+        background: #cc0088;
+        background-image: url(https://component-odyssey.s3.amazonaws.com/tick.svg);
+        background-position: center;
+        background-repeat: no-repeat;
+        border: none;
+      }
+
+      input:not([disabled])+label[for="checkbox"]:active .visual-checkbox {
+        background: black;
+      }
+
+      .visual-checkbox {
+        display: inline-block;
+        height: 32px;
+        width: 32px;
+        border-radius: 50%;
+        border: 2px solid black;
+      }
       `
 
       static properties = {
-        disabled: {
-          type: Boolean,
-          reflect: true,
-        },
-        checked: {
-          type: Boolean,
-          reflect: true
-        }
+        checked: { type: Boolean, reflect: true },
+        disabled: { type: Boolean, reflect: true }
+      }
+
+      constructor() {
+        super()
       }
 
       render() {
         return html`
-          <div id="checkbox-wrapper">
-            <button @click=${this.#onClick} ?disabled=${this.disabled} id="indicator"></button>
-            <label>
-              <p id="label">
-                <slot />
-              </p>
-            </label>
-          </div>`
+        <input ?disabled=${this.disabled} @change=${this.#onChange} id="checkbox" class="visually-hidden" type="checkbox" />
+        <label for="checkbox">
+          <span class="visual-checkbox"></span>
+          <slot></slot>
+        </label>
+        `
       }
 
-      #onClick = () => {
-        this.checked = !this.checked
+      #onChange = (e) => {
+        this.checked = e.target.checked;
       }
     }
 

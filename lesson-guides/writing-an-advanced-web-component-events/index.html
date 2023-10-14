@@ -26,9 +26,15 @@
 </head>
 
 <body>
-  <template id="odyssey-checkbox-template">
-    <style>
-      /* Component Styles */
+  <odyssey-checkbox>
+    Settings
+  </odyssey-checkbox>
+
+  <script type="module">
+    import { LitElement, css, html } from 'lit'
+
+    class OdysseyCheckbox extends LitElement {
+      static styles = css`
       :host {
         font-size: 18px;
         font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -80,7 +86,7 @@
         border: none;
       }
 
-      input:not([disabled]) + label[for="checkbox"]:active .visual-checkbox {
+      input:not([disabled])+label[for="checkbox"]:active .visual-checkbox {
         background: black;
       }
 
@@ -91,88 +97,29 @@
         border-radius: 50%;
         border: 2px solid black;
       }
-    </style>
-    <input id="checkbox" class="visually-hidden" type="checkbox" />
-    <label for="checkbox">
-      <span class="visual-checkbox"></span>
-      <slot></slot>
-    </label>
-  </template>
+      `
 
-  <odyssey-checkbox>
-    Settings
-  </odyssey-checkbox>
+      static properties = {
+        checked: { type: Boolean, reflect: true },
+        disabled: { type: Boolean, reflect: true }
+      }
 
-  <script type="module">
-    class OdysseyCheckbox extends HTMLElement {
       constructor() {
         super()
-
-        const template = document.getElementById('odyssey-checkbox-template')
-        const templateContent = template.content;
-
-        this.attachShadow({ mode: 'open' })
-        this.shadowRoot.appendChild(templateContent.cloneNode(true))
-        this.input = this.shadowRoot.querySelector('input')
       }
 
-      connectedCallback() {
-        const input = this.shadowRoot.querySelector('input');
-        input.addEventListener('change', this.#onChange)
-      }
-
-      disconnectedCallback() {
-        const input = this.shadowRoot.querySelector('input');
-        input.removeEventListener('change', this.#onChange)
-
+      render() {
+        return html`
+        <input ?disabled=${this.disabled} @change=${this.#onChange} id="checkbox" class="visually-hidden" type="checkbox" />
+        <label for="checkbox">
+          <span class="visual-checkbox"></span>
+          <slot></slot>
+        </label>
+        `
       }
 
       #onChange = (e) => {
-        if (!this.input.checked) {
-          this.removeAttribute('checked')
-        } else {
-          this.setAttribute('checked', '')
-        }
-      }
-
-      get disabled() {
-        return this.hasAttribute('disabled')
-      }
-
-      set disabled(val) {
-        if (val) {
-          this.setAttribute('disabled', '')
-        } else {
-          this.removeAttribute('disabled')
-        }
-      }
-
-      get checked() {
-        return this.hasAttribute('checked')
-      }
-
-      set checked(val) {
-        if (val) {
-          this.setAttribute('checked', '')
-        } else {
-          this.removeAttribute('checked')
-        }
-      }
-
-      static get observedAttributes() {
-        return ['disabled']
-      }
-
-      attributeChangedCallback(name, oldVal, newVal) {
-        const input = this.shadowRoot.querySelector('input');
-
-        if (name === 'disabled') {
-          if (newVal !== null) {
-            input.setAttribute('disabled', '')
-          } else {
-            input.removeAttribute('disabled')
-          }
-        }
+        this.checked = e.target.checked;
       }
     }
 
