@@ -2,8 +2,10 @@
 <html lang="en">
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="styles.css" />
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Work+Sans:wght@400;700&display=swap"
   rel="stylesheet" />
+
 
 <head>
   <meta charset="UTF-8">
@@ -32,21 +34,19 @@
 
   <script type="module">
     import { LitElement, css, html } from 'lit'
+    import { baseStyles } from './base-styles.js'
 
     class OdysseyCheckbox extends LitElement {
       static styles = css`
+      ${baseStyles}
+
       :host {
-        font-size: 18px;
-        font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
-          Roboto, Helvetica, sans-serif;
+        font-size: var(--checkbox-font-size);
+        font-family: var(--checkbox-font-family);
       }
 
       :host([disabled]) {
-        opacity: 0.5;
-      }
-
-      * {
-        box-sizing: border-box;
+        opacity: var(--checkbox-opacity-disabled);
       }
 
       .visually-hidden {
@@ -64,7 +64,7 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        gap: 8px;
+        gap: var(--checkbox-gap);
         width: fit-content;
         user-select: none;
       }
@@ -74,12 +74,12 @@
       }
 
       input:focus-visible+label[for="checkbox"] {
-        outline: 2px solid #1b00e5;
-        outline-offset: 4px;
+        outline: var(--checkbox-outline-width-focused) solid var(--checkbox-outline-color-focused);
+        outline-offset: var(--checkbox-outline-offset-focused);
       }
 
       input:checked+label[for="checkbox"] .visual-checkbox {
-        background-color: #cc0088;
+        background-color: var(--checkbox-check-background-color-checked);
         background-image: url(https://component-odyssey.s3.amazonaws.com/tick.svg);
         background-position: center;
         background-repeat: no-repeat;
@@ -87,15 +87,15 @@
       }
 
       input:not([disabled])+label[for="checkbox"]:active .visual-checkbox {
-        background: black;
+        background: var(--checkbox-check-background-color-active);
       }
 
       .visual-checkbox {
         display: inline-block;
-        height: 32px;
-        width: 32px;
-        border-radius: 50%;
-        border: 2px solid black;
+        height: var(--checkbox-check-height);
+        width: var(--checkbox-check-width);
+        border-radius: var(--checkbox-check-border-radius);
+        border: var(--checkbox-check-border-width) solid var(--checkbox-check-border-color);
       }
       `
 

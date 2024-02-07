@@ -1,0 +1,17 @@
+:root {
+  --checkbox-font-size: 18px;
+  --checkbox-font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Helvetica, sans-serif;
+  --checkbox-opacity-disabled: 0.5;
+  --checkbox-garp: 8px;
+  --checkbox-outline-width-focused: 2px;
+  --checkbox-outline-color-focused: #1b00e5;
+  --checkbox-outline-offset-focused: 4px;
+  --checkbox-check-background-color-checked: #cc0088;
+  --checkbox-check-background-color-active: black;
+  --checkbox-check-height: 32px;
+  --checkbox-check-width: 32px;
+  --checkbox-check-border-radius: 50%;
+  --checkbox-check-border-width: 2px;
+  --checkbox-check-border-color: black;
+}
