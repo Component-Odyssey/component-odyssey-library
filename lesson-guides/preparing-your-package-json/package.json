@@ -14,14 +14,16 @@
   "exports": {
     "./package.json": "./package.json",
     "./checkbox.js": "./src/checkbox/checkbox.js",
-    "./src/checkbox/checkbox.js": "./src/checkbox/checkbox.js", 
+    "./src/checkbox/checkbox.js": "./src/checkbox/checkbox.js",
     "./styles.css": "./src/checkbox/checkbox.js",
     "./src/checkbox/styles.css": "./src/checkbox/styles.css"
   },
   "author": "",
   "license": "ISC",
+  "devDependencies": {
+    "@web/dev-server": "^0.3.0"
+  },
   "dependencies": {
-    "@web/dev-server": "^0.3.0",
     "lit": "^2.8.0"
   }
 }
