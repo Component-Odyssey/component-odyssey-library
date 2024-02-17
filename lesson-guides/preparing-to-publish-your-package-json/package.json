@@ -1,12 +1,23 @@
 {
   "name": "component-odyssey-starter",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
-  "main": "index.js",
   "scripts": {
+    "lint:pkg": "npx publint",
     "start": "web-dev-server --node-resolve --open / --watch"
   },
   "keywords": [],
+  "files": [
+    "src"
+  ],
+  "exports": {
+    "./package.json": "./package.json",
+    "./checkbox.js": "./src/checkbox/checkbox.js",
+    "./src/checkbox/checkbox.js": "./src/checkbox/checkbox.js", 
+    "./styles.css": "./src/checkbox/checkbox.js",
+    "./src/checkbox/styles.css": "./src/checkbox/styles.css"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
