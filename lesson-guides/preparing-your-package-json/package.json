@@ -5,8 +5,7 @@
   "description": "",
   "scripts": {
     "lint:pkg": "publint",
-    "start": "web-dev-server --node-resolve --open / --watch",
-    "publish": "np"
+    "start": "web-dev-server --node-resolve --open / --watch"
   },
   "keywords": [],
   "files": [
