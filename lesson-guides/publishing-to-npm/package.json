@@ -6,6 +6,7 @@
   "scripts": {
     "lint:pkg": "publint",
     "start": "web-dev-server --node-resolve --open / --watch",
+    "test": "exit 0",
     "publish": "np",
     "publish:dry-run": "np --preview=true"
   },
