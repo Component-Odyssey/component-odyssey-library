@@ -1,5 +1,5 @@
 {
-  "name": "odyssey-components",
+  "name": "odyssey-checkbox-test",
   "version": "1.0.0",
   "type": "module",
   "description": "",
@@ -7,8 +7,8 @@
     "lint:pkg": "publint",
     "start": "web-dev-server --node-resolve --open / --watch",
     "test": "exit 0",
-    "publish": "np",
-    "publish:dry-run": "np --preview=true"
+    "release": "np",
+    "release:dry-run": "np --preview=true"
   },
   "keywords": [],
   "files": [
