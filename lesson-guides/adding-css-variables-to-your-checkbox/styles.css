@@ -11,7 +11,7 @@
   --checkbox-check-background-color-active: black;
   --checkbox-check-height: 32px;
   --checkbox-check-width: 32px;
-  --checkbox-check-border-radius: 50%;
+  --checkbox-check-border-radius: 2px;
   --checkbox-check-border-width: 2px;
   --checkbox-check-border-color: black;
 }
