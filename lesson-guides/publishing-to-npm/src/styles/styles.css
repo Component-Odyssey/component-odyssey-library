@@ -1,20 +1,94 @@
 @import url(https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Work+Sans:wght@400;700&display=swap);
 
-
 :root {
-  --checkbox-font-size: 18px;
-  --checkbox-font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+  --black: #1e1e1e;
+  --white: #fff;
+  --red: #e00034;
+  --orange: #eb5a00;
+  --yellow: #f0cb00;
+  --green: #2ad600;
+  --blue: #1b00e5;
+  --purple: #cc0088;
+
+  --primary-font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, Helvetica, sans-serif;
+
+
+  --checkbox-font-size: 18px;
+  --checkbox-font-family: var(--primary-font-family);
   --checkbox-opacity-disabled: 0.5;
   --checkbox-gap: 8px;
   --checkbox-outline-width-focused: 2px;
-  --checkbox-outline-color-focused: #1b00e5;
+  --checkbox-outline-color-focused: var(--blue);
   --checkbox-outline-offset-focused: 4px;
-  --checkbox-check-background-color-checked: #cc0088;
-  --checkbox-check-background-color-active: black;
+  --checkbox-check-background-color-checked: var(--purple);
+  --checkbox-check-background-color-active: var(--black);
   --checkbox-check-height: 32px;
   --checkbox-check-width: 32px;
   --checkbox-check-border-radius: 2px;
   --checkbox-check-border-width: 2px;
-  --checkbox-check-border-color: black;
+  --checkbox-check-border-color: var(--black);
+
+  --button-font-size: 18px;
+  --button-font-family: var(--primary-font-family);
+  --button-accent-color: var(--black);
+  --button-font-weight: 700;
+  --button-border-radius: 2px;
+}
+
+.odyssey-button {
+  --button-background-color: color-mix(in srgb, var(--button-accent-color) 10%, #fff);
+  --button-background-color-hover: color-mix(in srgb, var(--button-accent-color) 15%, #fff);
+  --button-background-color-active: color-mix(in srgb, var(--button-accent-color) 20%, #fff);
+
+  font-family: var(--button-font-family);
+  font-size: var(--button-font-size);
+  font-weight: var(--button-font-weight);
+  min-height: 72px;
+  padding: 8px;
+  min-width: 256px;
+  cursor: pointer;
+  transition: background 0.05s ease-in;
+  border: 1px solid var(--button-accent-color);
+  border-radius: var(--button-border-radius);
+  color: var(--button-accent-color);
+  background: var(--button-background-color);
+}
+
+.odyssey-button:hover {
+  background: var(--button-background-color-hover);
+}
+
+.odyssey-button:active {
+  background: var(--button-background-color-active);
+}
+
+.odyssey-button[data-size="small"] {
+  min-width: 0;
+  padding: 12px;
+  min-height: 0;
+}
+
+.odyssey-button[data-color="red"] {
+  --button-accent-color: var(--red);
+}
+
+.odyssey-button[data-color="blue"] {
+  --button-accent-color: var(--blue);
+}
+
+.odyssey-button[data-color="green"] {
+  --button-accent-color: var(--green);
+}
+
+.odyssey-button[data-color="purple"] {
+  --button-accent-color: var(--purple);
+}
+
+.odyssey-button[data-color="orange"] {
+  --button-accent-color: var(--orange);
+}
+
+.odyssey-button[data-color="yellow"] {
+  --button-accent-color: var(--yellow);
 }
