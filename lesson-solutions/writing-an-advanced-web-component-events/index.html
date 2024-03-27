@@ -1,16 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <meta charset="UTF-8" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Work+Sans:wght@400;700&display=swap"
     rel="stylesheet" />
 
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Component Odyssey</title>
-
   <style>
     /* Global Styles */
     * {
@@ -27,15 +24,10 @@
 </head>
 
 <body>
-  <odyssey-checkbox>
-    Settings
-  </odyssey-checkbox>
+  <template id="odyssey-checkbox-template">
 
-  <script type="module">
-    import { LitElement, css, html } from 'lit'
-
-    class OdysseyCheckbox extends LitElement {
-      static styles = css`
+    <style>
+      /* Component Styles */
       :host {
         font-size: 18px;
         font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -70,10 +62,6 @@
         user-select: none;
       }
 
-      input[disabled]+label[for="checkbox"] {
-        cursor: default;
-      }
-
       input:focus-visible+label[for="checkbox"] {
         outline: 2px solid #1b00e5;
         outline-offset: 4px;
@@ -87,6 +75,10 @@
         border: none;
       }
 
+      input[disabled]+label[for="checkbox"] {
+        cursor: default;
+      }
+
       input:not([disabled])+label[for="checkbox"]:active .visual-checkbox {
         background: black;
       }
@@ -98,29 +90,82 @@
         border-radius: 2px;
         border: 2px solid black;
       }
-      `
+    </style>
+    <input id="checkbox" class="visually-hidden" type="checkbox" />
 
-      static properties = {
-        checked: { type: Boolean, reflect: true },
-        disabled: { type: Boolean, reflect: true }
+    <label for="checkbox">
+      <span class="visual-checkbox"></span>
+      <slot></slot>
+    </label>
+  </template>
+
+  <odyssey-checkbox>
+    Settings
+  </odyssey-checkbox>
+
+  <script type="module">
+    class OdysseyCheckbox extends HTMLElement {
+      static get observedAttributes() {
+        return ['disabled']
+      }
+
+      get disabled() {
+        return this.hasAttribute('disabled')
+      }
+
+      set disabled(val) {
+        if (val) {
+          this.setAttribute('disabled', '')
+        } else {
+          this.removeAttribute('disabled')
+        }
+      }
+
+      get checked() {
+        return this.hasAttribute('checked')
+      }
+
+      #handleChange = () => {
+        const input = this.shadowRoot.querySelector('input');
+        if (input.checked) {
+          this.setAttribute('checked', '')
+        } else {
+          this.removeAttribute('checked')
+        }
       }
 
       constructor() {
         super()
+
+        const template = document.getElementById('odyssey-checkbox-template')
+        const templateContent = template.content;
+
+        this.attachShadow({ mode: 'open' })
+        this.shadowRoot.appendChild(templateContent.cloneNode(true))
       }
 
-      render() {
-        return html`
-        <input ?disabled=${this.disabled} @change=${this.#onChange} id="checkbox" class="visually-hidden" type="checkbox" />
-        <label for="checkbox">
-          <span class="visual-checkbox"></span>
-          <slot></slot>
-        </label>
-        `
+      connectedCallback() {
+        const input = this.shadowRoot.querySelector('input');
+
+        input.addEventListener('change', this.#handleChange)
       }
 
-      #onChange = (e) => {
-        this.checked = e.target.checked;
+      disconnectedCallback() {
+        const input = this.shadowRoot.querySelector('input');
+
+        input.removeEventListener('change', this.#handleChange)
+      }
+
+      attributeChangedCallback(name, oldVal, newVal) {
+        const input = this.shadowRoot.querySelector('input')
+
+        if (name === 'disabled') {
+          if (newVal !== null) {
+            input.setAttribute('disabled', '')
+          } else {
+            input.removeAttribute('disabled')
+          }
+        }
       }
     }
 

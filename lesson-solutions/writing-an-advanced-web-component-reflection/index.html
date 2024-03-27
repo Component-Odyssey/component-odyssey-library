@@ -99,9 +99,7 @@
     </label>
   </template>
 
-  <odyssey-checkbox>
-    Settings
-  </odyssey-checkbox>
+  <odyssey-checkbox disabled>Settings</odyssey-checkbox>
 
   <script type="module">
     class OdysseyCheckbox extends HTMLElement {
@@ -121,18 +119,6 @@
         }
       }
 
-      get checked() {
-        return this.hasAttribute('checked')
-      }
-
-      #handleChange = () => {
-        const input = this.shadowRoot.querySelector('input');
-        if (input.checked) {
-          this.setAttribute('checked', '')
-        } else {
-          this.removeAttribute('checked')
-        }
-      }
 
       constructor() {
         super()
@@ -142,18 +128,6 @@
 
         this.attachShadow({ mode: 'open' })
         this.shadowRoot.appendChild(templateContent.cloneNode(true))
-      }
-
-      connectedCallback() {
-        const input = this.shadowRoot.querySelector('input');
-
-        input.addEventListener('change', this.#handleChange)
-      }
-
-      disconnectedCallback() {
-        const input = this.shadowRoot.querySelector('input');
-
-        input.removeEventListener('change', this.#handleChange)
       }
 
       attributeChangedCallback(name, oldVal, newVal) {
