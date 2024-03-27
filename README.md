@@ -7,13 +7,13 @@ This is the repo that you'll be using throughout the entire course to build out 
 The repo is split into two folders:
 
 - "code"
-- "lesson-guides"
+- "lesson-solutions"
 
 **code**
 
 This is the folder that you'll be adding your code to throughout the course. Each lesson will build off of the previous one, so keep working in the same folder.
 
-**lesson-guides**
+**lesson-solutions**
 
 This folder contains the finished code for each lesson. You can take a look in these folders if you get stuck.
 
