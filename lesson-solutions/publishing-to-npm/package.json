@@ -6,8 +6,8 @@
   "scripts": {
     "lint:pkg": "publint",
     "start": "web-dev-server --node-resolve --open / --watch",
-    "test": "exit 0",
     "release": "np",
+    "test": "exit 0",
     "release:dry-run": "np --preview=true"
   },
   "keywords": [],
@@ -25,7 +25,7 @@
   "license": "ISC",
   "devDependencies": {
     "@web/dev-server": "^0.3.0",
-    "np": "^10.0.1",
+    "np": "^10.0.2",
     "publint": "^0.2.7"
   },
   "dependencies": {
