@@ -23,9 +23,15 @@ To get started, clone this repo using:
 
 `git clone git@github.com:Component-Odyssey/component-odyssey-library.git`
 
-Always check that you have the latest code by running `git pull` before you start working on a lesson:
+You should then create your own GitHub repo and push your version of the code to that repo. We run through this in the "Setting up Your Environment" lesson.
 
-`git pull`
+To ensure you have the latest changes and fixes I've made ot the starter repo, it's worth regularly pulling the changes I've made. You can do this by running:
+
+`npx https://gist.github.com/andrico1234/19ba43f562c7b56cb3181b958ef17d57`
+
+The above script pulls the latest changes from the original starter repo and merges them into your version of the code.
+
+Once that's complete, you can navigate to the "code" folder:
 
 Navigate to the "code" folder:
 
