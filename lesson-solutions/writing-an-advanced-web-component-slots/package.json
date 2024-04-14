@@ -1,13 +1,13 @@
 {
   "name": "component-odyssey-starter",
   "version": "1.0.0",
-  "description": "something",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "web-dev-server --node-resolve --open / --watch"
   },
   "keywords": [],
-  "author": "",
+  "author": "Andrico",
   "license": "ISC",
   "devDependencies": {
     "@web/dev-server": "^0.3.0"
