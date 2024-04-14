@@ -1,7 +1,7 @@
 {
   "name": "component-odyssey-starter",
   "version": "1.0.0",
-  "description": "",
+  "description": "something",
   "main": "index.js",
   "scripts": {
     "start": "web-dev-server --node-resolve --open / --watch"
