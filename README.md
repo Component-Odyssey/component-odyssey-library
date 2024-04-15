@@ -21,7 +21,7 @@ This folder contains the finished code for each lesson. You can take a look in t
 
 To get started, clone this repo using:
 
-`git clone git@github.com:Component-Odyssey/component-odyssey-library.git`
+`git clone https://github.com/Component-Odyssey/component-odyssey-library.git`
 
 You should then create your own GitHub repo and push your version of the code to that repo. We run through this in the "Setting up Your Environment" lesson.
 
