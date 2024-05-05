@@ -19,7 +19,7 @@
     "./src/styles/styles.css": "./src/styles/styles.css"
   },
   "author": "",
-  "license": "ISC",
+  
   "devDependencies": {
     "@web/dev-server": "^0.3.0",
     "publint": "^0.2.7"
