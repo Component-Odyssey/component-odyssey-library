@@ -19,7 +19,6 @@
     "./src/styles/styles.css": "./src/styles/styles.css"
   },
   "author": "",
-  
   "devDependencies": {
     "@web/dev-server": "^0.3.0",
     "publint": "^0.2.7"

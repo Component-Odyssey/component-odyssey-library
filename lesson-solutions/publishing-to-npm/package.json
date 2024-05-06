@@ -22,7 +22,6 @@
     "./src/styles/styles.css": "./src/styles/styles.css"
   },
   "author": "",
-  
   "devDependencies": {
     "@web/dev-server": "^0.3.0",
     "np": "^10.0.2",
